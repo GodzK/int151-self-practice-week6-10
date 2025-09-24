@@ -1,19 +1,23 @@
-// create p
-const pElement = document.createElement('p');
-// create id = "p5"
-// const idAttr = document.createAttribute('id');
-// idAttr.value = 'p5';
+//1. append <p> under <div id="demo">
+let div = document.getElementById("demo");
+let p = document.createElement("p");
+div.appendChild(p);
 
-pElement.setAttribute('id', 'p5');
-// binding id=P5 to p element
-// pElement.setAttributeNode(idAttr);
-// create text node
-// solution 1 : const textNode = document.createTextNode('Jookroo lakron');
+//1.5 add format='italic' attribute to <p>
+p.setAttribute("format", "italic");
+//2 try to add three different text types to <p>
 
-// solution 2 : 
-pElement.textContent = 'Jookroo lakron';
-// bindjg text node to p element
-// solution 2 not need binding  pElement.appendChild(textNode);
-// binding p id to body
-const body = document.body;
-body.appendChild(pElement);
+//2.1 add <i>Sample Italic Text</i> with innerHTML
+let p1 = document.createElement("p");
+p1.innerHTML = "<i>Sample Italic Text</i>";
+div.appendChild(p1);
+
+//2.2 add <i>Sample Italic Text</i> with innerText
+let p2 = document.createElement("p");
+p2.innerText = "<i>Sample Italic Text</i>";
+div.appendChild(p2);
+
+//2.3 add <i>Sample Italic Text</i> with textContent
+let p3 = document.createElement("p");
+p3.textContent = "<i>Sample Italic Text</i>";
+div.appendChild(p3);
