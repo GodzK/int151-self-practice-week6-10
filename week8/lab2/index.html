@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOM Lab Starter</title>
+</head>
+<body>
+  <header>
+    <h1 id="title">DOM Lab Starter</h1>
+  </header>
+
+  <main>
+    <section id="demo">
+      <p class="intro">นี่คือข้อความตัวอย่าง</p>
+      <ul id="list">
+        <li class="item">Item A</li>
+        <li class="item">Item B</li>
+        <li class="item">Item C</li>
+      </ul>
+      <button id="btn-add">เพิ่มรายการ</button>
+    </section>
+  </main>
+
+  <script>
+
+// create and manipulate (CRUD)
+    const list = document.getElementById("list")
+   // create element และ append
+const li = document.createElement('li');
+li.textContent = 'Item E - created by JS';
+li.className = 'item';
+list.appendChild(li);
+
+// insertBefore
+const firstList = list.firstElementChild;
+const liBefore = document.createElement("li")
+liBefore.textContent = "Inseted First";
+liBefore.classList = "item"
+list.insertBefore(liBefore, firstList)
+
+// replace
+const newSecond = document.createElement("li")
+newSecond.textContent = "new Second Element"
+newSecond.className = "item"
+list.replaceChild(newSecond,list.children[1])
+
+
+console.log(list);
+// remove
+list.removeChild(list.lastChild)
+
+
+
+
+  </script>
+</body>
+</html>

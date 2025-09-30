@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="modal-button" data-modal-id="modal1" data-user-status="active">
+      Open
+    </button>
+    <script>
+      const btn = document.getElementById("modal-button");
+      console.log("data attributes via dataset:", btn.dataset);
+      console.log("modal id via dataset.modalId:", btn.dataset.modalId);
+
+      // เปลี่ยนค่า dataset
+      btn.dataset.userStatus = "inactive";
+
+      // classList
+      btn.classList.add("btn", "btn-primary");
+      btn.classList.toggle("hidden");
+      if (btn.classList.contains("btn-primary")) {
+        console.log("มี class btn-primary");
+      }
+
+      // attributes
+      console.log("getAttribute id:", btn.getAttribute("id"));
+      btn.setAttribute("title", "Open modal");
+      btn.removeAttribute("data-modal-id");
+    </script>
+  </body>
+</html>

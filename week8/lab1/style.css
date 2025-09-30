@@ -1,0 +1,5 @@
+body { font-family: system-ui, sans-serif; padding: 20px; }
+.item { padding: 6px; }
+.highlight { background: #fffa8a; }
+.hidden { display: none; }
+#title { color: #0b6; }

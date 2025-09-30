@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="demoHtml">
+      <b>Hello</b> <span style="display: none">hidden</span> world
+    </div>
+    <script>
+      // innerHTML จะ parse HTML และ render จริง → อันตรายถ้าใช้กับ input จากผู้ใช้
+      // innerText จะคืนค่าเฉพาะข้อความที่มองเห็น (คำนึงถึง CSS เช่น display:none)
+      // textContent คืนข้อความทั้งหมดรวม hidden
+      const demo = document.getElementById("demoHtml");
+      console.log("innerHTML:", demo.innerHTML);
+      console.log("innerText:", demo.innerText);
+      console.log("textContent:", demo.textContent);
+      const userInput = '<img src=x onerror="alert(\'XSS\')">';
+      demo.textContent = userInput;
+    </script>
+  </body>
+</html>

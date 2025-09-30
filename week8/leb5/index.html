@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h2>To Do App (Lab 6)</h2>
+      <form id="todo-form">
+        <input id="todo-input" placeholder="พิมพ์งานที่ต้องทำ" required />
+        <button type="submit">เพิ่ม</button>
+      </form>
+      <ul id="todo-list"></ul>
+    </main>
+    <script>
+      const form = document.getElementById("todo-form")
+      const input = document.getElementById("todo-input")
+      const todoList = document.getElementById("todo-list")
+
+      form.addEventListener("submit" , (e)=>{
+       e.preventDefault();
+       const text = input.value.trim();
+       if (!text) {
+        return;
+       }
+       const li = document.createElement("li")
+       li.textContent = text;
+       li.dataset.id = Date.now();
+       const removeBtn = document.createElement("button");
+       removeBtn.textContent = "ลบ"
+       removeBtn.type = "button"
+       removeBtn.className = "remove-btn";
+       li.appendChild(document.createTextNode(' '));
+      li.appendChild(removeBtn);
+       todoList.appendChild(li);
+  input.value = '';
+      })
+
+      todoList.addEventListener('click', (e) => {
+  if (e.target && e.target.matches('button.remove-btn')) {
+    const li = e.target.closest('li');
+    if (li) li.remove();
+  }
+});
+    </script>
+  </body>
+</html>

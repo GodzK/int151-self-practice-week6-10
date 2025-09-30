@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOM Lab Starter</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <h1 id="title">DOM Lab Starter</h1>
+  </header>
+
+  <main>
+    <section id="demo">
+      <p class="intro">นี่คือข้อความตัวอย่าง</p>
+      <ul id="list">
+        <li class="item">Item A</li>
+        <li class="item">Item B</li>
+        <li class="item">Item C</li>
+      </ul>
+      <button id="btn-add">เพิ่มรายการ</button>
+    </section>
+  </main>
+
+  <script>
+    console.log('script loaded');
+    const title = document.getElementById("title")
+    const itemByClass = document.getElementsByClassName("item")
+    // loop each item
+    console.log(itemByClass);
+    for (let i = 0; i < itemByClass.length; i++) {
+        console.log(itemByClass[i]);;
+        
+    }
+
+    const allList = document.getElementsByTagName("li")
+    console.log("List all li",allList);
+
+    
+  </script>
+</body>
+</html>
