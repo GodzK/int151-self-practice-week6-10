@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Manipulating Elements</title>
+  </head>
+  <body>
+    <h3>SIT@KMUTT Restaurant</h3>
+    <div class="menu">
+      <ul id="appetizer">
+        <li class="vegan">Vegetable Rolls</li>
+        <!-- out of stock -->
+        <li class="meat">Chicken Wings</li>
+        <li class="meat">Tuna Sandwich</li>
+      </ul>
+      <ul id="soup">
+        <li class="meat">Spicy Bacon-Corn Soup</li>
+        <li class="vegan">Vegetable Soup</li>
+        <li class="meat">Beef Soup</li>
+        <li class="vegan">Coconut Soup</li>
+      </ul>
+    </div>
+    <p>***Enjoy Your Meal, Thank you***</p>
+    <script>
+      // 028 เธอฟ้อนเอน ผมฟ้อนรำ
+      const menuSection = document.querySelector(".menu");
+
+      if (menuSection) {
+        const allLists = menuSection.querySelectorAll("ul");
+        allLists.forEach((ul) => {
+          const items = ul.querySelectorAll("li");
+          items.forEach((item) => {
+            console.log(` ${item.textContent.trim()}`);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
