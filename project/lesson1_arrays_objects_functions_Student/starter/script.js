@@ -1,7 +1,5 @@
-// Lesson 1: Arrays, Objects, and Functions
-
 // 1. Create an empty array to hold the quotes
-const quotes = []
+const quotes = [];
 
 /*
   2. Function: addQuote
@@ -9,7 +7,7 @@ const quotes = []
   - Adds it to the quotes array
 */
 function addQuote(quote) {
-  // TODO: Add the quote object to the quotes array
+  quotes.push(quote);
 }
 
 /*
@@ -18,7 +16,10 @@ function addQuote(quote) {
   - Removes the quote with that id from the array
 */
 function deleteQuote(id) {
-  // TODO: Remove the quote object from the array using the given id
+  const index = quotes.findIndex(q => q.id === id);
+  if (index !== -1) {
+    quotes.splice(index, 1); // Remove 1 element at the found index
+  }
 }
 
 /*
@@ -27,7 +28,11 @@ function deleteQuote(id) {
   - Updates the quote with the given id
 */
 function updateQuote(id, updatedQuote) {
-  // TODO: Find the quote by id and update its properties
+  const quote = quotes.find(q => q.id === id);
+  if (quote) {
+    if (updatedQuote.content) quote.content = updatedQuote.content;
+    if (updatedQuote.author) quote.author = updatedQuote.author;
+  }
 }
 
 /*
@@ -35,14 +40,22 @@ function updateQuote(id, updatedQuote) {
   - Returns all quotes in the array
 */
 function getAllQuotes() {
-  // TODO: Return the quotes array
+  return quotes;
 }
 
 // 6. Test your functions below
-// TODO: Add 3 quotes using addQuote()
 
-// TODO: Delete 1 quote using deleteQuote()
+// Add 3 quotes
+addQuote({ id: 1, content: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" });
+addQuote({ id: 2, content: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" });
+addQuote({ id: 3, content: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" });
 
-// TODO: Update 1 quote using updateQuote()
+console.log("Initial Quotes:", getAllQuotes());
 
-// TODO: Print all quotes using getAllQuotes()
+// Delete quote with id 2
+deleteQuote(2);
+console.log("After Deleting Quote with id 2:", getAllQuotes());
+
+// Update quote with id 1
+updateQuote(1, { content: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" });
+console.log("After Updating Quote with id 1:", getAllQuotes());
