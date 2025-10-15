@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Settings</title>
+</head>
+<body>
+
+  <h2>Customize Page Style</h2>
+  
+  <form id="styleForm">
+    <label>
+      Background Color:
+      <input type="color" name="bgColor" value="#ffffff">
+    </label>
+    <br><br>
+
+    <label>
+      Font Color:
+      <input type="color" name="fontColor" value="#000000">
+    </label>
+    <br><br>
+
+    <label>
+      Font Size (px):
+      <input type="number" name="fontSize" value="16" min="8" max="72">
+    </label>
+    <br><br>
+
+    <button type="submit">Save Settings</button>
+    <button type="button" id="resetBtn">Reset to Default</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("styleForm");
+
+    const defaults = {
+      bgColor: "#ffffff",
+      fontColor: "#000000",
+      fontSize: "16",
+    };
+
+    function loadSetting() {
+      const bgColor = localStorage.getItem("bgColor") || defaults.bgColor;
+      const fontColor = localStorage.getItem("fontColor") || defaults.fontColor;
+      const fontSize = localStorage.getItem("fontSize") || defaults.fontSize;
+
+      document.body.style.backgroundColor = bgColor;
+      document.body.style.color = fontColor;
+      document.body.style.fontSize = fontSize + "px";
+
+      // Update the form values to match current settings
+      form.bgColor.value = bgColor;
+      form.fontColor.value = fontColor;
+      form.fontSize.value = fontSize;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const bgColor = form.bgColor.value;
+      const fontColor = form.fontColor.value;
+      const fontSize = form.fontSize.value;
+
+      localStorage.setItem("bgColor", bgColor);
+      localStorage.setItem("fontColor", fontColor);
+      localStorage.setItem("fontSize", fontSize);
+
+      document.body.style.backgroundColor = bgColor;
+      document.body.style.color = fontColor;
+      document.body.style.fontSize = fontSize + "px";
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      localStorage.removeItem("bgColor");
+      localStorage.removeItem("fontColor");
+      localStorage.removeItem("fontSize");
+      loadSetting();
+    });
+
+    loadSetting();
+  </script>
+
+</body>
+</html>
