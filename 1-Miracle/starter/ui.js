@@ -1,77 +1,72 @@
-// Lesson 3 - Events Starter
-
-// let quotes = []
-
-// Select DOM elements
+let quotes = []
+let id = 0
+let editing = null
 const quoteList = document.getElementById("quote-list")
-const form =document.getElementById("quoteForm")
-const contentInput = document.getElementById('content');
-const authorInput = document.getElementById('author');
-const idInput = document.getElementById('quoteId');
-const randomBtn = document.getElementById('randomBtn');
-const randomDisplay = document.getElementById('randomQuoteDisplay');
+
+const form = document.getElementById("quoteForm")
+
+const inputContent = document.getElementById("content")
+
+const inputAuthor = document.getElementById("author")
 
 
-function createQuoteElement(quote) {
-  const div = document.createElement("div")
-  div.dataset.id = quote.id
-  const content = document.createElement("p")
-  content.textContent = quote.content
-  const author = document.createElement("p")
-  author.textContent = quote.author
-  const editBtn = document.createElement("button")
-  editBtn.textContent = "Edit"
-  editBtn.className = "edit-btn"
-  editBtn.dataset.id = quote.id
-  const deleteBtn = document.createElement("button")
-  deleteBtn.textContent = "Delete"
-  deleteBtn.className = "delete-btn"
-  deleteBtn.dataset.id = quote.id
-  div.append(content,author , editBtn , deleteBtn)
-  return div
-  // a quote element example
-  //<section id="quote-list">
-  //  <div data-id="1">
-  //    <p>Confidence comes from discipline and training</p>
-  //    <p>Robert</p>
-  //    <button class="edit-btn" data-id="1">
-  //      Edit
-  //    </button>
-  //    <button class="delete-btn" data-id="1">
-  //      Delete
-  //    </button>
-  //  </div>
-  // </section>
+form.addEventListener("submit" , (event)=>{
+  event.preventDefault(); 
+  let content = inputContent.value
+  let author = inputAuthor.value
+  
+  if (editing !== null) {
+    editQuote(editing,content,author )
+    editing = null
+  }
+  else{
+    let quote = {id : id++ , author , content} 
+    quotes.push(quote)
+    inputContent.value = ""
+    inputAuthor.value = ""
+    fetchDom()
+  }
+
+})
+
+
+function fetchDom() {
+  quoteList.innerHTML = ""
+  quotes.forEach((e) =>{
+    const div = document.createElement("div")
+    div.dataset.id = e.id
+    const p = document.createElement('p')
+    p.textContent = e.content
+    const h2 = document.createElement("h2")
+    h2.textContent = e.author
+    const EditBtn = document.createElement("button")
+    EditBtn.dataset.id = e.id
+    EditBtn.textContent = "Edit Btn"
+    EditBtn.addEventListener("click" ,()=>{
+      inputContent.value = e.content
+      inputAuthor.value = e.author
+      editing = e.id
+    })
+    const RemoveBtn = document.createElement("button")
+    RemoveBtn.dataset.id = e.id
+    RemoveBtn.textContent = "Remove Btn"
+    RemoveBtn.addEventListener("click" ,()=>{
+      removeBtn(e.id)
+    })
+    div.append(h2,p,EditBtn , RemoveBtn)
+    quoteList.appendChild(div)
+  })
 }
 
-// Add, edit, delete quote functions
 
-function addQuoteToDOM(quote) {
-  const el = createQuoteElement(quote)
-  quoteList.appendChild(el)
+function editQuote(id , content , author ) {
+    const quote = quotes.find(e => e.id == id)
+    quote.content = content
+    quote.author = author
+    fetchDom()
 }
-function updateQuoteInDOM(quote) {}
-function deleteQuoteFromDOM(id) {}
-function renderQuotes() {}
-function showRandomQuote() {}
-// Event listeners for form submission, edit, and delete clicks
-
-
-form.addEventListener('submit', handleFormSubmit) 
-
-// ต้องเขียนฟังก์ชันเพื่อจัดการการ Submit โดยเฉพาะ
-function handleFormSubmit(event) {
-    event.preventDefault(); // ป้องกันการรีโหลดหน้าจอ
-    
-    // ต้องดึงค่าจาก form inputs มาสร้าง quote object ก่อน
-    const newQuote = { 
-        id: Date.now(), // ใช้ ID ชั่วคราว หรือ import ID จากไฟล์ 2
-        content: contentInput.value, 
-        author: authorInput.value 
-    };
-
-    // เรียกฟังก์ชันเพิ่มเข้า DOM
-    addQuoteToDOM(newQuote);
-    
-    // ต้องมีการเรียกใช้ฟังก์ชัน addQuote(content, author) จากไฟล์ 2 ด้วย
+function removeBtn(id) {
+  quotes = quotes.filter(e => e.id !== id)
+  fetchDom()
 }
+fetchDom()
