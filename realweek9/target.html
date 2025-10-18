@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input type="text" id="nameInput" />
+<p id="message"></p>
+
+<script>
+const input = document.getElementById("nameInput");
+const message = document.getElementById("message");
+
+// ฟังเหตุการณ์ "input" เพื่อตรวจสอบแบบทันที
+input.addEventListener("input", (e) => {
+  message.textContent = "คุณพิมพ์: " + e.target.value;
+});
+
+// ฟังเหตุการณ์ "blur" เพื่อตรวจสอบเมื่อออกจาก input
+input.addEventListener("blur", (e) => {
+  if (e.target.value.trim() === "") {
+    message.textContent = "ช่องนี้ไม่ควรว่าง";
+    message.style.color = "red";
+  }
+});
+</script>
+
+</body>
+</html>
